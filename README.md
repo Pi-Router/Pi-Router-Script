@@ -4,7 +4,6 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 * DNS Caching and Ad Blocking
 * Secure DNS with [DNSSEC](https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions) and [Unbound](https://nlnetlabs.nl/projects/unbound/about/)
 * OpenVPN Server
-* OpenVPN Client
 * Dynamic DNS Updater Using:
   * [Duck DNS](https://www.duckdns.org/)
   * [No-IP](https://www.noip.com/)
