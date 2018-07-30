@@ -2,7 +2,7 @@
 This uses a variety of functions to create a wireless router out of a Raspberry Pi.
 # Features
 * DNS Caching and Ad Blocking
-* DNS over HTTPS with Cloudflare's DNS, [1.1.1.1](https://1.1.1.1)
+* Secure DNS with [DNSSEC](https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions) and [Unbound](https://nlnetlabs.nl/projects/unbound/about/)
 * OpenVPN Server
 * OpenVPN Client
 * Dynamic DNS Host
@@ -10,4 +10,3 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 
 # Credit
 * Pi-Hole [Website](https://pi-hole.net) | [Github](https://github.com/pi-hole)
-* PiVPN [Website](http://www.pivpn.io) | [Github](https://github.com/pivpn)
