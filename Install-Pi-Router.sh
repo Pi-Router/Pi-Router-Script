@@ -23,6 +23,7 @@ DDNS () {
 #Install and create CA
 CA () {
 wget https://raw.githubusercontent.com/jwepdx/jwepdx.github.io/master/bashscripts/Scripts/CA
+chmod +x CA
 mv CA /usr/bin
 CA -ca RootCA 4096
 CA -sub RootCA SubCA 4096
