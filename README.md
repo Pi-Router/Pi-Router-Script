@@ -22,6 +22,6 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 * Become a Developer
 * Paypal
 * Crypto Currency:
- * Bitcoin:
- * Bitcoin Cash:
- * Ethereum: 
+  * Bitcoin:
+  * Bitcoin Cash:
+  * Ethereum: 
