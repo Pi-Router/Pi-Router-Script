@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca5595a5b30e448aadb3f6206024742f)](https://www.codacy.com/project/Pi-Router/Pi-Router-Script/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Pi-Router/Pi-Router-Script&amp;utm_campaign=Badge_Grade_Dashboard)
 # Pi-Router-Script
 This uses a variety of functions to create a wireless router out of a Raspberry Pi.
 
