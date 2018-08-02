@@ -42,15 +42,15 @@ Back-up () {
 
 #Install recursive DNS Server
 Unbound () {
-#Define File Movements
+#Define ConfigFile Movements
 IPv4 () {
-	mv /etc/pi-router/configs/unbound.conf-ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
+	mv /etc/pi-router/configs/unbound.conf.ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 IPv6 () {
-	mv /etc/pi-router/configs/unbound.conf-ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
+	mv /etc/pi-router/configs/unbound.conf.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 Both () {
-	mv /etc/pi-router/configs/unbound.conf-ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
+	mv /etc/pi-router/configs/unbound.conf.ipv4.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 
 #Get list of root servers and move them into place
@@ -59,7 +59,7 @@ mv root.hints /var/lib/unbound/
 
 #Choose Which Config To Use
 whiptail --backtitle "IP" --title "IPv4 Or IPv6" --radiolist \
-"Protocol" $r $c 3 \
+"Choose Protocol:" $r $c 3 \
 "Both" "Both IPv4 and IPv6" ON \
 "IPv4" "Only IPv4" OFF \
 "IPv6" "Only IPv6" OFF 2>results
@@ -85,13 +85,45 @@ IPTables () {
 
 }
 
-#Configure The Wireless Adapters to 
+#Configure The Wireless Network
 Hostapd () {
-
+	#Gets Interfaces and finds wlan interfaces
+	Interfaces () {
+		INTERFACES=$(ip --oneline link show up | grep -v "lo" | awk '{print $2}' | cut -d':' -f1 | cut -d'@' -f1)
+	}
 }
 
 #Custom Dynamic DNS Updater
 DDNS () {
+#Configuration For No-IP
+No-IP () {
+
+}
+
+#Configuration for Duck DNS
+Duck-DNS () {
+
+}
+
+#Configuration For Cloudflare DNS
+Cloudflare () {
+
+}
+
+#Choose DDNS Provider
+
+whiptail --backtitle "DDNS" --title "Choose Dynamic DNS Provider" --menu "Choose an option" $r $c 16 \
+"No-IP" "Use No-IP as your DDNS provider" \
+"Duck DNS" "Use Duck DNS as your DDNS provider" \
+"Cloudflare" "Use Cloudflare as your DDNS provider" 2>results
+while read choice
+do
+case $choice in
+	No-IP) No-IP;;
+	Duck DNS) Duck-DNS;;
+	Cloudflare) Cloudflare;;
+esac
+done < results
 
 }
 
@@ -104,6 +136,7 @@ mv CA /usr/bin
 CA -ca RootCA 4096
 CA -sub RootCA SubCA 4096
 Usage CA -c RootCA SubCA pi.router 4096 pi.hole www.pi.hole www.pi.router
+whiptail --backtitle "Continue?" --title "Continue?" --yes-button "Continue" --no-button "Cancel" --yesno "The CA and certificate have been created. Do you wish to continue?" $r $c
 }
 
 #Install PiVPN
@@ -113,8 +146,10 @@ PiVPN () {
 
 #Install Modified Pi-hole
 Pi-hole () {
-    whiptail --backtitle "Pi-hole" --title "Install Pi-hole DNS ad-blocker" --msgbox "You are about to install Pi-hole, a DNS ad-blocker. The following installer has been created by Pi-hole LLC. Pi-Router is not affliiated with Pi-hole LLC" ${r} ${c}
-    whiptail --backtitle "Choices" --title "Information" --msgbox "Your answers do not matter except for the Pi-hole IP address, Interface (should be br0), and the blocking over ipv4 and ipv6 (should be both if thy are avalible)" ${r} ${c}
+    whiptail --backtitle "Pi-hole" --title "Install Pi-hole DNS ad-blocker" --yes-button "Continue" --no-button "Cancel" --yesno "You are about to install Pi-hole, a DNS ad-blocker. The following installer has been created by Pi-hole LLC. Pi-Router is not affliiated with Pi-hole LLC" ${r} ${c}
+    YN=$?
+if [[ $YN == 0 ]]; then
+    whiptail --backtitle "Choices" --title "Information" --msgbox "Your answers do not matter except for the Pi-hole IP address, Interface (should be br0 or if you have have vpn setup br1), and the blocking over ipv4 and ipv6 (should be both if thy are avalible)" ${r} ${c}
 
     #Run Pi-hole Installer
     curl -sSL https://install.pi-hole.net | bash
@@ -124,6 +159,10 @@ Pi-hole () {
     pihole checkout core FTLDNS
     pihole checkout web FTLDNS
 
+else
+	exit 1
+fi
+    
 }
 
 #Install Web Interface
