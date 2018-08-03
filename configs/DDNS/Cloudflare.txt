@@ -1,0 +1,11 @@
+#!/bin/bash
+
+IP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+
+cat /etc/pi-router/vars/DDNS.conf
+
+curl -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONEID/dns_records/$DNSRECORDIDENTIFIER" \
+     -H "X-Auth-Email: $EMAIL" \
+     -H "X-Auth-Key: $AUTHKEY" \
+     -H "Content-Type: application/json" \
+     --data '{"type":"A","name":"$DOMAIN","content":"$IP","ttl":120,"proxied":false}'

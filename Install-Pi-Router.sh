@@ -44,13 +44,13 @@ Back-up () {
 Unbound () {
 #Define ConfigFile Movements
 IPv4 () {
-	mv /etc/pi-router/configs/unbound.conf.ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
+	mv /etc/pi-router/configs/unbound/conf.ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 IPv6 () {
-	mv /etc/pi-router/configs/unbound.conf.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
+	mv /etc/pi-router/configs/unbound/conf.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 Both () {
-	mv /etc/pi-router/configs/unbound.conf.ipv4.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
+	mv /etc/pi-router/configs/unbound/conf.ipv4.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 
 #Get list of root servers and move them into place
@@ -95,11 +95,6 @@ Hostapd () {
 
 #Custom Dynamic DNS Updater
 DDNS () {
-#Configuration For No-IP
-No-IP () {
-
-}
-
 #Configuration for Duck DNS
 Duck-DNS () {
 
@@ -113,13 +108,11 @@ Cloudflare () {
 #Choose DDNS Provider
 
 whiptail --backtitle "DDNS" --title "Choose Dynamic DNS Provider" --menu "Choose an option" $r $c 16 \
-"No-IP" "Use No-IP as your DDNS provider" \
 "Duck DNS" "Use Duck DNS as your DDNS provider" \
 "Cloudflare" "Use Cloudflare as your DDNS provider" 2>results
 while read choice
 do
 case $choice in
-	No-IP) No-IP;;
 	Duck DNS) Duck-DNS;;
 	Cloudflare) Cloudflare;;
 esac
@@ -170,7 +163,7 @@ Web-Interface () {
 
 }
 
-#Install Additional Configs That Woul Have Been Overwritten
+#Install Additional Configs That Would Have Been Overwritten
 AdditionalConfigs () {
 
 }
