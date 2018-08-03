@@ -91,6 +91,12 @@ Hostapd () {
 	Interfaces () {
 		INTERFACES=$(ip --oneline link show up | grep -v "lo" | awk '{print $2}' | cut -d':' -f1 | cut -d'@' -f1)
 	}
+
+   #Presents prompt to ask to select interfaces for hostapd
+   Choose () {
+      whiptail —-backtitle “Interfaces” —-title “Choose Interfaces To Broadcast Wi-Fi” —-checklist \
+“Choose Interfaces: (exclude interfaces for a mesh network backhaul.)”
+   }
 }
 
 #Custom Dynamic DNS Updater
