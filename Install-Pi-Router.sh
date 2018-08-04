@@ -103,6 +103,9 @@ Hostapd () {
 DDNS () {
 #Configuration for Duck DNS
 Duck-DNS () {
+whiptail —-backtitle “Duck DNS” —-title “Configuring Duck DNS” —-msgbox “You will need to provide your token and domain” $r $c
+TOKEN=$(whiptail —-backtitle “Token” —-title “Duck DNS Token” —-inputbox “Please enter your Duck DNS token” $r $c 3>&1 1>&2 2>&3)
+
 
 }
 
@@ -112,7 +115,6 @@ Cloudflare () {
 }
 
 #Choose DDNS Provider
-
 whiptail --backtitle "DDNS" --title "Choose Dynamic DNS Provider" --menu "Choose an option" $r $c 16 \
 "Duck DNS" "Use Duck DNS as your DDNS provider" \
 "Cloudflare" "Use Cloudflare as your DDNS provider" 2>results
