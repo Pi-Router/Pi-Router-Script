@@ -103,10 +103,20 @@ Hostapd () {
 DDNS () {
 #Configuration for Duck DNS
 Duck-DNS () {
+#Intro to Duck DNS Setup
 whiptail —-backtitle “Duck DNS” —-title “Configuring Duck DNS” —-msgbox “You will need to provide your token and domain” $r $c
+
+#Set Token For Updating Duck DNS
 TOKEN=$(whiptail —-backtitle “Token” —-title “Duck DNS Token” —-inputbox “Please enter your Duck DNS token” $r $c 3>&1 1>&2 2>&3)
 
+#Sets Domain For Duck DNS
+DOMAIN=$(whiptail —-backtitle “Domain” —-title “Duck DNS Domain” —-inputbox “Please enter your Duck DNS domain to update.” $r $c 3>&1 1>&2 2>&3)
 
+#Save input to update script
+echo “#DDNS Service Is Duck DNS
+
+DOMAIN=$DOMAIN
+TOKEN=$TOKEN” > /etc/pi-router/vars/DDNS.conf
 }
 
 #Configuration For Cloudflare DNS
