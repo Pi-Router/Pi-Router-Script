@@ -121,6 +121,31 @@ TOKEN=$TOKEN” > /etc/pi-router/vars/DDNS.conf
 
 #Configuration For Cloudflare DNS
 Cloudflare () {
+whiptail —-backtitle “Cloudflare” —-title “Configure Cloudflare DNS” —-msgbox “You will need to provide the Zone ID, DNS Record Identifier, Email, Auth Key, and Domain.” $r $c
+
+#Sets Zone ID For Cloudflare
+ZONEID=$(whiptail —-backtitle “Zone ID” —-title “Zone ID” —-inputbox “Please enter your Zone ID to update.” $r $c 3>&1 1>&2 2>&3)
+
+#Sets DNS Record Identifier
+DNSRECORDIDENTIFIER=$(whiptail —-backtitle “DNS Record” —-title “DNS Record Identifier” —-inputbox “Please enter your DNS Record Identifier to update.” $r $c 3>&1 1>&2 2>&3)
+
+#Sets Email For Cloudflare
+EMAIL=$(whiptail —-backtitle “Email” —-title “Cloudflare Email” —-inputbox “Please enter your email to update with.” $r $c 3>&1 1>&2 2>&3)
+
+#Sets Domain For Duck DNS
+AUTHKEY=$(whiptail —-backtitle “Auth Key” —-title “Cloudflare Auth Key” —-inputbox “Please enter your Auth Key to update with.” $r $c 3>&1 1>&2 2>&3)
+
+#Sets Domain For Cloudflare
+DOMAIN=$(whiptail —-backtitle “Domain” —-title “Cloudflare Domain” —-inputbox “Please enter your Cloudflare domain to update.” $r $c 3>&1 1>&2 2>&3)
+
+#Save input to update script
+echo “#DDNS Service Is Cloudflare
+
+DOMAIN=$DOMAIN
+AUTHKEY=$AUTHKEY
+EMAIL=$EMAIL
+ZONEID=$ZONEID
+DNSRECORDIDENTIFIER=$DNSRECORDIDENDIFIER” > /etc/pi-router/vars/DDNS.conf
 
 }
 
