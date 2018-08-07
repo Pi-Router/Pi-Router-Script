@@ -44,13 +44,13 @@ Back-up () {
 Unbound () {
 #Define ConfigFile Movements
 IPv4 () {
-	mv /etc/pi-router/configs/unbound/conf.ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
+	cp /etc/pi-router/configs/unbound/conf.ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 IPv6 () {
-	mv /etc/pi-router/configs/unbound/conf.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
+	cp /etc/pi-router/configs/unbound/conf.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 Both () {
-	mv /etc/pi-router/configs/unbound/conf.ipv4.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
+	cp /etc/pi-router/configs/unbound/conf.ipv4.ipv6 /etc/unbound/unbound.conf.d/pi-router.conf
 }
 
 #Get list of root servers and move them into place
@@ -147,6 +147,11 @@ EMAIL=$EMAIL
 ZONEID=$ZONEID
 DNSRECORDIDENTIFIER=$DNSRECORDIDENDIFIER” > /etc/pi-router/vars/DDNS.conf
 
+#Create file to update IP
+cp /etc/pi-router/configs/DDNS/cloudflare.conf /etc/pi-router/DDNS.sh
+
+#Create Cron Job
+
 }
 
 #Choose DDNS Provider
@@ -201,7 +206,7 @@ fi
     
 }
 
-#Install Web Interface
+#Install Our Web Interface
 Web-Interface () {
 
 }
@@ -213,6 +218,15 @@ AdditionalConfigs () {
 
 #Restart All Services and Reboot
 RestartServices () {
+#pihole
+
+#pivpn
+
+#hostapd
+
+#iproute2
+
+#iptables
 
 }
 
