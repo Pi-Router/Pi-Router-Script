@@ -9,7 +9,6 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 * OpenVPN Server
 * Dynamic DNS Updater Using:
   * [Duck DNS](https://www.duckdns.org/)
-  * [No-IP](https://www.noip.com/)
   * [Cloudflare DNS](https://www.cloudflare.com/dns/)
 * Local Certificate Authority
 
