@@ -14,7 +14,7 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 
 # Credit
 * Pi-hole [Website](https://pi-hole.net) | [Github](https://github.com/pi-hole)
-* PiVPN [WebSite](http://www.pivpn.io) | [Github](https://github.com/pivpn)
+* PiVPN [Website](http://www.pivpn.io) | [Github](https://github.com/pivpn)
 
 # Developers
 
