@@ -75,30 +75,6 @@ done < results
 
 }
 
-#Bridge The Network Interfaces
-Bridge () {
-
-}
-
-#Create an IPTable Firewall
-IPTables () {
-
-}
-
-#Configure The Wireless Network
-Hostapd () {
-	#Gets Interfaces and finds wlan interfaces
-	Interfaces () {
-		INTERFACES=$(ip --oneline link show up | grep -v "lo" | awk '{print $2}' | cut -d':' -f1 | cut -d'@' -f1)
-	}
-
-   #Presents prompt to ask to select interfaces for hostapd
-   Choose () {
-      whiptail —-backtitle “Interfaces” —-title “Choose Interfaces To Broadcast Wi-Fi” —-checklist \
-“Choose Interfaces: (exclude interfaces for a mesh network backhaul.)”
-   }
-}
-
 #Custom Dynamic DNS Updater
 DDNS () {
 #Configuration for Duck DNS
@@ -182,7 +158,7 @@ whiptail --backtitle "Continue?" --title "Continue?" --yes-button "Continue" --n
 
 #Install PiVPN
 PiVPN () {
-  
+  curl -L https://install.pivpn.io | bash
 }
 
 #Install Modified Pi-hole
@@ -204,6 +180,32 @@ else
 	exit 1
 fi
     
+}
+
+#Bridge The Network Interfaces
+Bridge () {
+#Get WAN Interface
+whiptail —-backtitle “WAN” —-title “Select WAN Interface —-radiolist \
+“Select the interface that is connected to the internet”$r $c \
+}
+
+#Create an IPTable Firewall
+IPTables () {
+
+}
+
+#Configure The Wireless Network
+Hostapd () {
+	#Gets Interfaces and finds wlan interfaces
+	Interfaces () {
+		INTERFACES=$(ip --oneline link show up | grep -v "lo" | awk '{print $2}' | cut -d':' -f1 | cut -d'@' -f1)
+	}
+
+   #Presents prompt to ask to select interfaces for hostapd
+   Choose () {
+      whiptail —-backtitle “Interfaces” —-title “Choose Interfaces To Broadcast Wi-Fi” —-checklist \
+“Choose Interfaces: (exclude interfaces for a mesh network backhaul.)”
+   }
 }
 
 #Install Our Web Interface
