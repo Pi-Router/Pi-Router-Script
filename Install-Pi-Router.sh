@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 #Ensures Complete Setup
 set -e
@@ -10,7 +10,7 @@ fi
 
 #Update Packages
 apt-get update
-apt-get upgrade
+apt-get upgrade -y
 
 #Variables
 	#Dialog Sizing
@@ -32,7 +32,7 @@ GitFiles () {
 #Install Required Packages
 InstallPackages () {
 #With 'apt-get'
-apt-get install unbound hostapd iproute2 iptables openssl
+apt-get install unbound hostapd iproute2 iptables ip6tables openssl -y
 }
 
 #Back-up Original Files
@@ -42,7 +42,7 @@ Back-up () {
 
 #Install recursive DNS Server
 Unbound () {
-#Define ConfigFile Movements
+#Define Config File Movements
 IPv4 () {
 	cp /etc/pi-router/configs/unbound/conf.ipv4 /etc/unbound/unbound.conf.d/pi-router.conf
 }
@@ -158,6 +158,7 @@ whiptail --backtitle "Continue?" --title "Continue?" --yes-button "Continue" --n
 
 #Install PiVPN
 PiVPN () {
+	#Create Custom version
   curl -L https://install.pivpn.io | bash
 }
 
@@ -170,11 +171,6 @@ if [[ $YN == 0 ]]; then
 
     #Run Pi-hole Installer
     curl -sSL https://install.pi-hole.net | bash
-
-    #Set To Use FTLDNS Beta
-    echo "FTLDNS" | sudo tee /etc/pihole/ftlbranch
-    pihole checkout core FTLDNS
-    pihole checkout web FTLDNS
 
 else
 	exit 1
@@ -197,9 +193,7 @@ IPTables () {
 #Configure The Wireless Network
 Hostapd () {
 	#Gets Interfaces and finds wlan interfaces
-	Interfaces () {
-		INTERFACES=$(ip --oneline link show up | grep -v "lo" | awk '{print $2}' | cut -d':' -f1 | cut -d'@' -f1)
-	}
+		INTERFACES=$(iw dev | awk '$1=="Interface"{print $2}')
 
    #Presents prompt to ask to select interfaces for hostapd
    Choose () {
