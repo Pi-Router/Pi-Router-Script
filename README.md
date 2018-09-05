@@ -16,6 +16,7 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 * Pi-hole [Website](https://pi-hole.net) | [Github](https://github.com/pi-hole) *
 * PiVPN [Website](http://www.pivpn.io) | [Github](https://github.com/pivpn)
 
+*This project is not affiliated with Pi-hole or PiVPN. This uses Pi-hole’s FTLDNS and gravity.sh
 # Developers
 
 # Donate and Support
