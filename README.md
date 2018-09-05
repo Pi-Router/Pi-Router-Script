@@ -13,7 +13,7 @@ This uses a variety of functions to create a wireless router out of a Raspberry 
 * Local Certificate Authority
 
 # Credit
-* Pi-hole [Website](https://pi-hole.net) | [Github](https://github.com/pi-hole)
+* Pi-hole [Website](https://pi-hole.net) | [Github](https://github.com/pi-hole) *
 * PiVPN [Website](http://www.pivpn.io) | [Github](https://github.com/pivpn)
 
 # Developers
