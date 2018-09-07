@@ -30,7 +30,7 @@ PersistantInterfaceNames () {
                 WLANMACARRAY=$(sed ':a;N;$!ba;s/\n/ /g' $TEMP)
                 declare -a ARRAY=($WLANMACARRAY)
                 WLANNUM=$(echo "$WLANMACARRAY" | wc -w)
-        PersistantNames (){
+                PersistantNames () {
                         (( NUM = $i - 1 ))
                         echo '"SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="${ARRAY[$NUM]}", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL$
                 }
