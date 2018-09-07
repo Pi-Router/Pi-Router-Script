@@ -17,7 +17,7 @@ PersistantInterfaceNames () {
         WAN () {
                 WANINTERFACE=$( ifconfig | grep -v "lo" | grep "RUNNING" | awk '{print $1}' | cut -d':' -f1)
                 WANMAC=$(cat /sys/class/net/"$WANINTERFACE"/address)
-                echo 'SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="$WANMAC", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="$
+                echo 'SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="$WANMAC", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="eth*", NAME="WAN"'
         }
         WLAN () {
                 local TEMP
@@ -32,7 +32,7 @@ PersistantInterfaceNames () {
                 WLANNUM=$(echo "$WLANMACARRAY" | wc -w)
                 PersistantNames () {
                         (( NUM = $i - 1 ))
-                        echo '"SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="${ARRAY[$NUM]}", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL$
+                        echo '"SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="${ARRAY[$NUM]}", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="wlan*", NAME="${ARRAY[$NUM]}"'
                 }
                 run $WLANNUM AddPersistantNames
         }
